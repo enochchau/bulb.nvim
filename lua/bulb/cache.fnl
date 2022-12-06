@@ -36,12 +36,12 @@ end
            (.. file-contents (t-package-preload module-name code)))
          (write-file cache-path))))
 
-(fn gen-preload-cache []
+(fn gen-preload-cache [paths]
   "Generate the preload file for all the files in the first runtime path"
   (let [{: get-fnl-files} (require :bulb.fs)
         {: compile-file : setup-compiler} (require :bulb.compiler)
-        {: get-module-name} (require :bulb.lutil)
-        fnl-files (get-fnl-files (vim.fn.stdpath :config))]
+        {: get-module-name : get-bulb-files} (require :bulb.lutil)
+        fnl-files (get-fnl-files (vim.fn.stdpath :config) (get-bulb-files))]
     (setup-compiler)
     (each [_ filename (ipairs fnl-files)]
       (let [module-name (get-module-name filename)]

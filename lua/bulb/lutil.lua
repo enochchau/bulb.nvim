@@ -53,7 +53,19 @@ local function get_module_name(fnl_file)
     return module_name
 end
 
+--- get bulb fnl files
+---@return table
+local function get_bulb_files()
+    -- this file should be at ./lua/bulb/bootstrap.lua
+    local targetpath = debug.getinfo(1, "S").source:match "@?(.*)"
+    -- lets go up to ./lua
+    targetpath = vim.fs.dirname(vim.fs.dirname(targetpath))
+    local files = vim.fn.glob(targetpath .. "/**/bulb/*.fnl", vim.NIL, true)
+    return files
+end
+
 return {
     ["get-module-name"] = get_module_name,
     ["update-fnl-macro-rtp"] = update_fnl_macro_rtp,
+    ['get-bulb-files'] = get_bulb_files
 }
