@@ -27,3 +27,9 @@ Need to add runtimepaths to fennel.path and fennel.macro-path
 2. Parallel compilation
 3. There's a way to load ftplugins from lua's `require`. might wanna look into that.
 4. Do people lazy load parts of their configs?
+
+## License
+
+- `bulb/fennel.lua` is licensed under MIT. The License is included at `./FENNEL_LICENSE`.
+
+The rest of this code is currently unlicensed.
