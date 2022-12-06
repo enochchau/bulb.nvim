@@ -41,8 +41,10 @@ end
   (let [{: get-fnl-files} (require :bulb.fs)
         {: compile-file : setup-compiler} (require :bulb.compiler)
         {: get-module-name : get-bulb-files} (require :bulb.lutil)
-        fnl-files (get-fnl-files (vim.fn.stdpath :config) (get-bulb-files))]
+        fnl-files (get-fnl-files (vim.fn.stdpath :config) )]
     (setup-compiler)
+    (each [_ filename (ipairs (get-bulb-files))]
+      (table.insert fnl-files filename))
     (each [_ filename (ipairs fnl-files)]
       (let [module-name (get-module-name filename)]
         ;; if this is a macro, we don't want to compile it
