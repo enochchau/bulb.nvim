@@ -1,0 +1,91 @@
+bulb.txt
+
+================================================================================
+CONTENTS                                                           *bulb-contents*
+
+1. Nvim bulb fennel compiler......................|bulb-nvim_bulb_fennel_compiler|
+    1.1. Installation..........................................|bulb-installation|
+    1.2. Usage........................................................|bulb-usage|
+        1.2.1. Commands............................................|bulb-commands|
+        1.2.2. Configuration..................................|bulb-configuration|
+    1.3. How it works..........................................|bulb-how_it_works|
+
+================================================================================
+NVIM BULB FENNEL COMPILER                         *bulb-nvim_bulb_fennel_compiler*
+
+This was extracted from my own dotfiles. It's still really alpha.
+More documentation is coming soon.
+
+A Fennel compiler plugin with zero overhead.
+
+--------------------------------------------------------------------------------
+INSTALLATION                                                   *bulb-installation*
+
+With Packer (https://github.com/wbthomason/packer.nvim)
+>
+    use {"ec965/bulb.nvim", run = ":BulbPreload"}
+<
+
+--------------------------------------------------------------------------------
+USAGE                                                                 *bulb-usage*
+
+Put this at the top of your `init.lua`.
+>
+    require("ec965/bulb.nvim").setup()
+<
+
+If you use impatient.nvim (https://github.com/lewis6991/impatient.nvim)
+you can put it right after that.
+>
+    require('impatient')
+    require("ec965/bulb.nvim").setup()
+<
+
+Bulb can bootstrap itself.
+The preload file will be automatically generated if it's missing.
+
+You should regenerate the preload file yourself after editing your files.
+
+COMMANDS                                                           *bulb-commands*
+
+*   `BulbPreload` - generate the module preload file.
+*   `BulbClear` - remove the module preload file.
+*   `BulbOpen <module-name>` - open the preload file at the module specified. If no module name is given, the file is just opened.
+*   `BulbRun <filename>` - compile and run a Fennel file, results are printed to stdout.
+*   `BulbCompile <input> <output>` - compile an input file to the output. If no output is specified, the results are printed to stdout.
+
+`BulbRun` and `BulbCompile` were originally created to be run in headless mode.
+You can use Neovim as a Fennel compiler like so:
+>
+    # evaluate a fennel file
+    nvim --headless -c "BulbRun $INPUT" +q
+    # compile a fennel file
+    nvim --headless -c "BulbCompile $INPUT $OUTPUT" +q
+<
+
+CONFIGURATION                                                 *bulb-configuration*
+>
+    -- default configuration
+    require("ec965/bulb.nvim") {
+       ["compiler-options"] = { 
+          compilerEnv = _G
+          -- you can add any valid compiler settings for the fennel compiler
+       },
+       ["cache-path"] = vim.fn.stdpath "cache" .. "/bulbcache.lua",
+    }
+<
+
+--------------------------------------------------------------------------------
+HOW IT WORKS                                                   *bulb-how_it_works*
+
+1.  Looks for all the Fennel files in your config directory (`~/.config/nvim` or whatever `stdpath('config')` resolves to).
+2.  Compiles them into a module preload file that uses `package.preload`.
+3.  Loads the preload file at startup.
+
+You have to manually recreate the preload file everytime you update your configs.
+This is a worthy trade off.
+Most other Fennel plugins will load the entire fennel compiler on startup
+which takes a fair amount of time.
+Bulb only loads the bare minimum it needs, the Fennel compiler is only loaded
+when a compilation command is called.
+

@@ -41,7 +41,7 @@ end
   (let [{: get-fnl-files} (require :bulb.fs)
         {: compile-file : setup-compiler} (require :bulb.compiler)
         {: get-module-name : get-bulb-files} (require :bulb.lutil)
-        fnl-files (get-fnl-files (vim.fn.stdpath :config) )]
+        fnl-files (get-fnl-files (vim.fn.stdpath :config))]
     (setup-compiler)
     (each [_ filename (ipairs (get-bulb-files))]
       (table.insert fnl-files filename))

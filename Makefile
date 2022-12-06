@@ -2,6 +2,9 @@ SHELL := /bin/bash
 
 FNL_FILES := $(shell find . -name '*.fnl' -type f | sort)
 
+.PHONY: all
+all: doc/bulb.txt fmt
+
 # format lua and fennel files
 .PHONY: fmt
 fmt:
@@ -11,3 +14,6 @@ fmt:
 .PHONY: update_fennel
 update_fennel:
 	./update_fennel.sh
+
+doc/bulb.txt: README.md
+	md2vim $< $@
