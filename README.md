@@ -1,5 +1,8 @@
 # Bulb
 
+Bulb is a Neovim plugin that allows you to seamlessly include Fennel in your configs.
+You can require Fennel modules from Lua and visa-versa.
+
 Bulb was originally made for use with a Makefile in Neovim's headless mode.
 In that regard, it adheres more closely to the compile -> run cycle rather
 than automatic compilation provided by other Neovim Fennel plugins.
@@ -11,7 +14,7 @@ overhead at start time.
 With [Packer](https://github.com/wbthomason/packer.nvim)
 
 ```lua
-use {"ec965/bulb.nvim", run = ":BulbPreload"}
+use "ec965/bulb.nvim"
 ```
 
 ## Usage
