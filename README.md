@@ -1,5 +1,8 @@
 # Nvim bulb fennel compiler
 
+This was extracted from my own dotfiles. It's still really alpha.
+More documentation is coming soon.
+
 Just compiles everything in the Neovim config dir.
 
 ## How it works
