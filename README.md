@@ -1,5 +1,7 @@
 # Bulb
 
+Fair warning, I jus ripped this out of my dotfiles. Don't expect anything to stay the same.
+
 Bulb is a Neovim plugin that allows you to seamlessly include Fennel in your configs.
 You can require Fennel modules from Lua and visa-versa.
 
