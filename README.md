@@ -77,26 +77,3 @@ Most other Fennel plugins will load the entire fennel compiler on startup
 which takes a fair amount of time.
 Bulb only loads the bare minimum it needs, the Fennel compiler is only loaded
 when a compilation command is called.
-
-## License
-
-- `bulb/fennel.lua` is licensed under MIT. The License is included at `./FENNEL_LICENSE`.
-
-The rest of this code is currently unlicensed.
-
-## TODO
-
-1. store the bulb cache in a seperate preload file so that it doesn't
-   add to the runtime when loading the general preload file
-2. Parallel compilation
-3. There's a way to load ftplugins from lua's `require`. might wanna look into that.
-4. Do people lazy load parts of their configs?
-
-### Optimizations
-
-1. Check timestamps to see if a file needs to be recompiled.
-   For this we need a dependency graph for macros.
-   We can generate the graph using a compiler plugin like hotpot.
-   We can reuse the cache file to store module metadata (deps, modify time) on global object similar to packer.
-2. Using luv async functions for fs operations.
-3. Using worker threads to do parallel compilation
