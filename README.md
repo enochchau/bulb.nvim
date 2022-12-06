@@ -71,6 +71,13 @@ require("ec965/bulb.nvim") {
 2. Compiles them into a module preload file that uses `package.preload`.
 3. Loads the preload file at startup.
 
+You have to manually recreate the preload file everytime you update your configs.
+This is a worthy trade off.
+Most other Fennel plugins will load the entire fennel compiler on startup
+which takes a fair amount of time.
+Bulb only loads the bare minimum it needs, the Fennel compiler is only loaded
+when a compilation command is called.
+
 ## License
 
 - `bulb/fennel.lua` is licensed under MIT. The License is included at `./FENNEL_LICENSE`.
