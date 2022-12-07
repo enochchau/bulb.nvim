@@ -24,7 +24,7 @@ use "ec965/bulb.nvim"
 Put this at the top of your `init.lua`.
 
 ```lua
-require("ec965/bulb.nvim").setup()
+require("bulb").setup()
 ```
 
 If you use [impatient.nvim](https://github.com/lewis6991/impatient.nvim)
@@ -32,7 +32,7 @@ you can put it right after that.
 
 ```lua
 require('impatient')
-require("ec965/bulb.nvim").setup()
+require("bulb").setup()
 ```
 
 Bulb can bootstrap itself.
