@@ -63,7 +63,7 @@ nvim --headless -c "BulbCompile $INPUT $OUTPUT" +q
 
 ```lua
 -- default configuration
-require("ec965/bulb.nvim") {
+require("bulb").setup {
    ["compiler-options"] = { 
       compilerEnv = _G
       -- you can add any valid compiler settings for the fennel compiler
