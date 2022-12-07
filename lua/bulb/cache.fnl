@@ -1,4 +1,5 @@
 ;; use module-name as the key
+(local uv vim.loop)
 (local cache {:module {} :macro {}})
 
 ;; string templates
@@ -36,8 +37,9 @@ end
            (.. file-contents (t-package-preload module-name code)))
          (write-file cache-path))))
 
-(fn gen-preload-cache [paths]
+(fn gen-preload-cache []
   "Generate the preload file for all the files in the first runtime path"
+  (var begin (uv.hrtime))
   (let [{: get-fnl-files} (require :bulb.fs)
         {: compile-file : setup-compiler} (require :bulb.compiler)
         {: get-module-name : get-bulb-files} (require :bulb.lutil)
@@ -52,7 +54,9 @@ end
         (if (and (not= nil module-name) (= (. cache.macro module-name) nil))
             (->> (compile-file filename)
                  (add-module filename module-name))))))
-  (write-cache))
+  (write-cache)
+  (var finish (uv.hrtime))
+  (print "bulb: Compiled in" (- finish begin) "ns"))
 
 (fn open-cache [t]
   (let [module-name t.args
