@@ -1,3 +1,7 @@
+I've decided to abandon this project in favor of a more basic Fennel Neovim compiler plugin
+called [fnlnvim](https://github.com/ec965/fnlnvim).
+
+
 # Bulb
 
 Fair warning, I jus ripped this out of my dotfiles. Don't expect anything to stay the same.
